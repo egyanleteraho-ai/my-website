@@ -10,14 +10,74 @@
   <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl">
     <h1 class="text-3xl font-bold text-center text-indigo-600 mb-6">Create an Account</h1>
     
-    <iframe src="https://forms.gle/j3X5naywX3nGD1xx9?embedded=true" 
-            width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">
-      Loading…
-    </iframe>
+    <!-- OTP Form -->
+    <form id="otpForm" class="space-y-4">
+      <div>
+        <label>Email</label>
+        <input type="email" id="email" class="border w-full p-2 rounded" required />
+      </div>
+      <button type="button" onclick="sendOTP()" 
+        class="bg-indigo-600 text-white px-4 py-2 rounded">
+        Send OTP
+      </button>
+    </form>
+
+    <!-- OTP Verification -->
+    <div id="otpSection" class="mt-4 hidden">
+      <label>Enter OTP</label>
+      <input type="text" id="otpInput" class="border w-full p-2 rounded" />
+      <button onclick="verifyOTP()" 
+        class="bg-green-600 text-white px-4 py-2 mt-2 rounded">
+        Verify OTP
+      </button>
+    </div>
+
+    <!-- Google Form (hidden until OTP success) -->
+    <div id="formSection" class="hidden mt-6">
+      <iframe src="https://forms.gle/j3X5naywX3nGD1xx9?embedded=true" 
+              width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">
+        Loading…
+      </iframe>
+    </div>
     
     <p class="mt-4 text-center text-sm text-gray-600">
       Already have an account? <a href="login.html" class="text-indigo-600 hover:underline">Log in</a>
     </p>
   </div>
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+  let generatedOTP;
+
+  function sendOTP() {
+    generatedOTP = Math.floor(100000 + Math.random() * 900000);
+    let email = document.getElementById("email").value;
+
+    Email.send({
+      SecureToken : "YOUR_SMTPJS_TOKEN", 
+      To : email,
+      From : "youremail@gmail.com",
+      Subject : "SparkLearn OTP Verification",
+      Body : "Your OTP is " + generatedOTP
+    }).then(
+      message => {
+        alert("OTP sent to " + email);
+        document.getElementById("otpSection").classList.remove("hidden");
+      }
+    );
+  }
+
+  function verifyOTP() {
+    let userOTP = document.getElementById("otpInput").value;
+    if(userOTP == generatedOTP) {
+      alert("OTP Verified ✅");
+      document.getElementById("formSection").classList.remove("hidden");
+      document.getElementById("otpForm").classList.add("hidden");
+      document.getElementById("otpSection").classList.add("hidden");
+    } else {
+      alert("Invalid OTP ❌");
+    }
+  }
+</script>
 </body>
 </html>
