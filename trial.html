@@ -7,35 +7,23 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 min-h-screen py-10">
-  <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
-    <h1 class="text-2xl font-bold mb-4">Book a Free Trial</h1>
-    <!-- Example using Formspree (replace ACTION with your Formspree endpoint) -->
-    <form id="trialForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <label class="block text-sm font-medium">Parent name</label>
-      <input name="parent_name" class="w-full mb-3 mt-1 p-2 border rounded" required>
-      <label class="block text-sm font-medium">Child name</label>
-      <input name="child_name" class="w-full mb-3 mt-1 p-2 border rounded" required>
-      <label class="block text-sm font-medium">Email</label>
-      <input name="email" type="email" class="w-full mb-3 mt-1 p-2 border rounded" required>
-      <label class="block text-sm font-medium">Phone (WhatsApp)</label>
-      <input name="phone" class="w-full mb-3 mt-1 p-2 border rounded" required>
-      <label class="block text-sm font-medium">Preferred time</label>
-      <select name="timeslot" class="w-full mb-3 mt-1 p-2 border rounded">
-        <option>5:00–6:00 PM IST</option>
-        <option>6:00–7:00 PM IST</option>
-        <option>Weekend Slot</option>
-      </select>
-      <label class="block text-sm font-medium">Program</label>
-      <select name="program" class="w-full mb-4 mt-1 p-2 border rounded">
-        <option>Public Speaking</option>
-        <option>Creative Writing</option>
-        <option>Phonics</option>
-      </select>
+  <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+    <h1 class="text-2xl font-bold mb-6 text-center">Book Your Free Trial</h1>
+    
+    <!-- Embed Google Form -->
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdyabcd123XYZ/viewform?embedded=true" 
+      width="100%" 
+      height="800" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0">
+      Loading…
+    </iframe>
 
-      <button type="submit" class="w-full py-3 bg-blue-600 text-white rounded">Request Trial</button>
-    </form>
-
-    <p class="text-xs text-gray-500 mt-4">Tip: Replace the form action with a Formspree endpoint (free) or a Google Form if you want submissions emailed to you without a backend.</p>
+    <p class="text-xs text-gray-500 mt-4 text-center">
+      All responses will be automatically saved to Google Sheets.
+    </p>
   </div>
 </body>
 </html>
