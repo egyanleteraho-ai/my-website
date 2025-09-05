@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparkLearn - EdTech Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/framer-motion@9.5.1/dist/framer-motion.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(29, 78, 216, 0.1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-40 border-b bg-white/80 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-6 h-6 text-blue-600"></i>
+                <span class="font-bold text-lg text-blue-600">SparkLearn</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 text-sm">
+                <a href="#programs" class="hover:text-blue-600 transition-colors">Programs</a>
+                <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
+                <a href="#outcomes" class="hover:text-blue-600 transition-colors">Outcomes</a>
+                <a href="#pricing" class="hover:text-blue-600 transition-colors">Pricing</a>
+                <a href="#faq" class="hover:text-blue-600 transition-colors">FAQ</a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <button class="px-4 py-2 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors">
+                    Log in
+                </button>
+                <button class="px-4 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors">
+                    Book Free Trial
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 -z-10 hero-gradient"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-blue-100 text-blue-700 mb-4">
+                    <i data-lucide="star" class="w-3.5 h-3.5"></i>
+                    LIVE 1:1 Classes • Ages 6–16
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                    Confident Communicators, <span class="text-blue-600">Future Leaders</span>
+                </h1>
+                <p class="mt-4 text-gray-600 max-w-xl">
+                    Launch a PlanetSpark-style site: book trials, run live Zoom classes, collect payments, and track progress—all in one modern, responsive experience.
+                </p>
+                <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                    <button class="px-6 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors font-medium">
+                        Book a Free Trial
+                    </button>
+                    <button class="px-6 py-3 border border-gray-300 rounded-2xl hover:bg-gray-50 transition-colors font-medium">
+                        Explore Programs
+                    </button>
+                </div>
+                <div class="mt-6 flex items-center gap-6 text-sm text-gray-600">
+                    <span class="flex items-center gap-2"><i data-lucide="shield" class="w-4 h-4"></i> Secure Payments</span>
+                    <span class="flex items-center gap-2"><i data-lucide="globe-2" class="w-4 h-4"></i> 13+ Countries</span>
+                    <span class="flex items-center gap-2"><i data-lucide="star" class="w-4 h-4"></i> 4.8/5 Avg Rating</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="relative bg-gray-100 rounded-3xl p-4 shadow-xl">
+                    <div class="aspect-video w-full rounded-2xl bg-white border grid place-items-center">
+                        <i data-lucide="video" class="w-10 h-10 text-blue-600"></i>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-3">
+                        <div class="rounded-2xl border bg-white p-4">
+                            <p class="text-xs text-gray-500 mb-2">Next session</p>
+                            <p class="font-semibold">Public Speaking 101</p>
+                            <p class="text-xs text-gray-500">Today • 6:00 PM IST</p>
+                        </div>
+                        <div class="rounded-2xl border bg-white p-4">
+                            <p class="text-xs text-gray-500 mb-2">Coach</p>
+                            <p class="font-semibold">Ananya S.</p>
+                            <p class="text-xs text-gray-500">Certified Communication Coach</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="w-full py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Everything you need to launch</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Built for speed: plug in Calendly, Zoom, Stripe/Razorpay, and go live.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center feature-icon mb-3">
+                        <i data-lucide="calendar" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Trial Booking</h3>
+                    <p class="text-sm text-gray-600">Embed Calendly/Acuity to let parents book 1:1 demo classes in their timezone.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center feature-icon mb-3">
+                        <i data-lucide="video" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Live Classes</h3>
+                    <p class="text-sm text-gray-600">Run sessions on Zoom/Jitsi/Whereby. Auto-generate, track, and share class links.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center feature-icon mb-3">
+                        <i data-lucide="credit-card" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Payments</h3>
+                    <p class="text-sm text-gray-600">Accept subscriptions & one-time fees via Stripe (global) and Razorpay (India).</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center feature-icon mb-3">
+                        <i data-lucide="user-round" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Dashboards</h3>
+                    <p class="text-sm text-gray-600">Separate portals for students, parents, and coaches with progress tracking.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center feature-icon mb-3">
+                        <i data-lucide="message-square" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Comms & Email</h3>
+                    <p class="text-sm text-gray-600">Automate reminders, follow-ups, and receipts with Mailchimp/Zapier.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center feature-icon mb-3">
+                        <i data-lucide="shield" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Privacy & Security</h3>
+                    <p class="text-sm text-gray-600">Role-based access, consent for recordings, GDPR/CCPA-ready patterns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="w-full py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Our Programs</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Mix-and-match 1:1, small groups, and project-based learning.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Program 1 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center bg-blue-100 mb-3">
+                        <i data-lucide="mic" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Public Speaking Mastery</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Voice, posture, delivery</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Impromptu & debate</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Showcase every month</li>
+                    </ul>
+                </div>
+                
+                <!-- Program 2 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center bg-blue-100 mb-3">
+                        <i data-lucide="book-open" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Creative Writing Lab</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Story craft & structure</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Peer review & edits</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Publish student zines</li>
+                    </ul>
+                </div>
+                
+                <!-- Program 3 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <div class="w-12 h-12 rounded-2xl grid place-items-center bg-blue-100 mb-3">
+                        <i data-lucide="school" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Foundational Phonics</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Sounds to sentences</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Games & drills</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Parent tips each week</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outcomes Section -->
+    <section id="outcomes" class="w-full py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Learning outcomes</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Track confidence, clarity, creativity, and collaboration with simple rubrics.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Outcome 1 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <h3 class="text-lg font-semibold mb-3">Confidence on stage</h3>
+                    <p class="text-sm text-gray-600">Measured monthly with badges, coach feedback, and a growth snapshot you can share.</p>
+                </div>
+                
+                <!-- Outcome 2 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <h3 class="text-lg font-semibold mb-3">Clear spoken & written English</h3>
+                    <p class="text-sm text-gray-600">Measured monthly with badges, coach feedback, and a growth snapshot you can share.</p>
+                </div>
+                
+                <!-- Outcome 3 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <h3 class="text-lg font-semibold mb-3">Critical thinking & debate</h3>
+                    <p class="text-sm text-gray-600">Measured monthly with badges, coach feedback, and a growth snapshot you can share.</p>
+                </div>
+                
+                <!-- Outcome 4 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <h3 class="text-lg font-semibold mb-3">Creativity & storytelling</h3>
+                    <p class="text-sm text-gray-600">Measured monthly with badges, coach feedback, and a growth snapshot you can share.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="w-full py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Trusted by parents & learners</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Real outcomes, happy families.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-200"></div>
+                        <div>
+                            <h3 class="text-base font-semibold">Parent 1</h3>
+                            <p class="text-xs text-gray-500">Mumbai, India</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"My child's confidence skyrocketed. The coach was patient and the projects were super engaging!"</p>
+                    <div class="flex">
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-200"></div>
+                        <div>
+                            <h3 class="text-base font-semibold">Parent 2</h3>
+                            <p class="text-xs text-gray-500">Delhi, India</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"The progress tracking dashboard is fantastic. I can see exactly how my child is improving each week!"</p>
+                    <div class="flex">
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-200"></div>
+                        <div>
+                            <h3 class="text-base font-semibold">Parent 3</h3>
+                            <p class="text-xs text-gray-500">Bangalore, India</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"The flexibility to schedule classes at our convenience has been a game-changer for our busy family."</p>
+                    <div class="flex">
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="w-full py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Simple, transparent pricing</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Starter plans for MVP. Switch to subscriptions as you scale.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Plan 1 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <h3 class="text-2xl font-semibold mb-2">Trial</h3>
+                    <p class="text-3xl font-bold mb-4">Free</p>
+                    <ul class="space-y-2 text-sm mb-6">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> 1× 30-min 1:1 class</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Coach feedback</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Progress snapshot</li>
+                    </ul>
+                    <button class="w-full py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors font-medium">
+                        Book Trial
+                    </button>
+                </div>
+                
+                <!-- Plan 2 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <h3 class="text-2xl font-semibold mb-2">Starter</h3>
+                    <p class="text-3xl font-bold mb-4">₹3999 / mo</p>
+                    <ul class="space-y-2 text-sm mb-6">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> 4 live classes</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Parent dashboard</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Assignments & reviews</li>
+                    </ul>
+                    <button class="w-full py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors font-medium">
+                        Start Now
+                    </button>
+                </div>
+                
+                <!-- Plan 3 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                    <h3 class="text-2xl font-semibold mb-2">Pro</h3>
+                    <p class="text-3xl font-bold mb-4">₹8999 / mo</p>
+                    <ul class="space-y-2 text-sm mb-6">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> 8 live classes</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Priority support</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"></i> Certificates & showcases</li>
+                    </ul>
+                    <button class="w-full py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors font-medium">
+                        Upgrade
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="book" class="w-full py-16 md:py-24 bg-white">
+        <div class="max-w-3xl mx-auto px-4 md:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Book a free trial</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">This form is MVP-ready. Replace with Calendly/Acuity or your custom backend when ready.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm p-6 border">
+                <form class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-sm font-medium">Parent name</label>
+                        <input class="mt-1 w-full rounded-xl border px-3 py-2" placeholder="e.g., Priya Sharma" />
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium">Child name</label>
+                        <input class="mt-1 w-full rounded-xl border px-3 py-2" placeholder="e.g., Aarav" />
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium">Email</label>
+                        <input type="email" class="mt-1 w-full rounded-xl border px-3 py-2" placeholder="you@example.com" />
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium">Phone (WhatsApp)</label>
+                        <input class="mt-1 w-full rounded-xl border px-3 py-2" placeholder="+91" />
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium">Preferred time</label>
+                        <select class="mt-1 w-full rounded-xl border px-3 py-2">
+                            <option>5:00–6:00 PM IST</option>
+                            <option>6:00–7:00 PM IST</option>
+                            <option>Weekend Slot</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium">Program</label>
+                        <select class="mt-1 w-full rounded-xl border px-3 py-2">
+                            <option>Public Speaking</option>
+                            <option>Creative Writing</option>
+                            <option>Phonics</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button class="w-full py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors font-medium" type="button" onclick="alert('For MVP: connect this button to Calendly, Airtable, or your backend webhook.')">
+                            Request Trial
+                        </button>
+                        <p class="text-xs text-gray-500 mt-2 text-center">By continuing you agree to our Terms & Privacy.</p>
+                    </div>
+                </form>
+                <div class="mt-8 rounded-2xl border p-4 bg-gray-50">
+                    <p class="text-sm font-medium mb-2">Prefer instant booking?</p>
+                    <div class="text-xs text-gray-600">
+                        Add your <span class="font-medium">Calendly</span> inline embed here. In Webflow/Bubble, paste the embed code or use the plugin.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="w-full py-16 md:py-24 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-4 md:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Frequently asked questions</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- FAQ 1 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border">
+                    <h3 class="text-lg font-semibold mb-3">How do live classes work?</h3>
+                    <p class="text-sm text-gray-600">We generate Zoom links for each session and share them via email/WhatsApp and your dashboard.</p>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border">
+                    <h3 class="text-lg font-semibold mb-3">Can I get a refund?</h3>
+                    <p class="text-sm text-gray-600">MVP tip: clearly state your refund window (e.g., within 7 days) and show contact info for support.</p>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border">
+                    <h3 class="text-lg font-semibold mb-3">Do you offer group classes?</h3>
+                    <p class="text-sm text-gray-600">Yes. Start with 1:1 and add small cohorts (3–6 learners) as demand grows.</p>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border">
+                    <h3 class="text-lg font-semibold mb-3">Is payment secure?</h3>
+                    <p class="text-sm text-gray-600">Yes—Stripe and Razorpay handle PCI-compliant payments. We never store card details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-10 grid md:grid-cols-4 gap-8 text-sm">
+            <div>
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-blue-600"></i>
+                    <span class="font-bold text-blue-600">SparkLearn</span>
+                </div>
+                <p class="text-gray-600">Launching confident communicators through live, project-based learning.</p>
+            </div>
+            <div>
+                <p class="font-semibold mb-2">Company</p>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="#" class="hover:text-blue-600 transition-colors">About</a></li>
+                    <li><a href="#" class="hover:text-blue-600 transition-colors">Careers</a></li>
+                    <li><a href="#" class="hover:text-blue-600 transition-colors">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="font-semibold mb-2">Support</p>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="#" class="hover:text-blue-600 transition-colors">Help Center</a></li>
+                    <li><a href="#" class="hover:text-blue-600 transition-colors">Contact</a></li>
+                    <li><a href="#" class="hover:text-blue-600 transition-colors">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="font-semibold mb-2">Get the app</p>
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors text-sm">App Store</button>
+                    <button class="px-4 py-2 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors text-sm">Play Store</button>
+                </div>
+            </div>
+        </div>
+        <div class="border-t py-6 text-center text-xs text-gray-600">
+            © 2023 SparkLearn EdTech Pvt Ltd • All rights reserved
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Simple animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.card-hover');
+            
+            const observer = new IntersectionObserver((entries
