@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login - SparkLearn</title>
+  <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4">Log in</h1>
+    <form action="#" method="post">
+      <label class="block text-sm font-medium">Email</label>
+      <input name="email" type="email" class="w-full mb-3 mt-1 p-2 border rounded" required>
+      <label class="block text-sm font-medium">Password</label>
+      <input name="password" type="password" class="w-full mb-4 mt-1 p-2 border rounded" required>
+      <button type="button" onclick="alert('This is a static page. Add backend or OAuth to enable real login.')" class="w-full py-2 bg-blue-600 text-white rounded">Log in</button>
+    </form>
+    <p class="text-sm mt-4">Don't have an account? <a href="signup.html" class="text-blue-600">Sign up</a></p>
+    <p class="text-xs text-gray-500 mt-2">Note: This is a static page. To accept real logins you need a backend (Firebase/Auth0/custom server).</p>
+  </div>
+</body>
+</html>
