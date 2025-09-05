@@ -45,37 +45,37 @@
     </p>
   </div>
 
-<script src="https://smtpjs.com/v3/smtp.js"></script>
 <script>
   let generatedOTP;
 
-  function sendOTP() {
+  async function sendOTP() {
     generatedOTP = Math.floor(100000 + Math.random() * 900000);
     let email = document.getElementById("email").value;
 
-    Email.send({
-      SecureToken : "b2b3c836-69e6-47c8-841d-f957fc717120", 
-      To : email,
-      From : "egyanleteraho@gmail.com",
-      Subject : "SparkLearn OTP Verification",
-      Body : "Your OTP is " + generatedOTP
-    }).then(
-      message => {
-        alert("OTP sent to " + email);
-        document.getElementById("otpSection").classList.remove("hidden");
-      }
-    );
+    let response = await fetch("https://script.google.com/macros/s/AKfycbz58Hwop3C1YMWYYB_z4HQ0sSzAHw0AklzXnjmz7KtG1UhevgUrTqKq98MKEyb32HLPEw/exec", {
+      method: "POST",
+      body: JSON.stringify({ email: email, otp: generatedOTP }),
+      headers: { "Content-Type": "application/json" }
+    });
+
+    let result = await response.text();
+    if (result === "Sent") {
+      alert("✅ OTP sent to " + email + ". Check Inbox/Spam.");
+      document.getElementById("otpSection").classList.remove("hidden");
+    } else {
+      alert("❌ Error sending OTP: " + result);
+    }
   }
 
   function verifyOTP() {
     let userOTP = document.getElementById("otpInput").value;
     if(userOTP == generatedOTP) {
-      alert("OTP Verified ✅");
+      alert("OTP Verified ✅ You may continue.");
       document.getElementById("formSection").classList.remove("hidden");
       document.getElementById("otpForm").classList.add("hidden");
       document.getElementById("otpSection").classList.add("hidden");
     } else {
-      alert("Invalid OTP ❌");
+      alert("❌ Invalid OTP. Try again.");
     }
   }
 </script>
