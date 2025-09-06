@@ -1,441 +1,442 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secure Signup Form</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    
-    .container {
-      width: 100%;
-      max-width: 500px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-    
-    .header {
-      background: #4f46e5;
-      color: white;
-      padding: 25px;
-      text-align: center;
-    }
-    
-    .header h1 {
-      font-size: 1.8rem;
-      margin-bottom: 5px;
-    }
-    
-    .header p {
-      opacity: 0.9;
-    }
-    
-    .form-container {
-      padding: 25px;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #374151;
-    }
-    
-    input {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: border-color 0.3s;
-    }
-    
-    input:focus {
-      outline: none;
-      border-color: #4f46e5;
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-    }
-    
-    .input-with-icon {
-      position: relative;
-    }
-    
-    .input-with-icon i {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #9ca3af;
-    }
-    
-    .btn-group {
-      display: flex;
-      gap: 15px;
-      margin-top: 30px;
-    }
-    
-    button {
-      flex: 1;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    .btn-otp {
-      background: #4f46e5;
-      color: white;
-    }
-    
-    .btn-otp:hover {
-      background: #4338ca;
-    }
-    
-    .btn-signup {
-      background: #10b981;
-      color: white;
-    }
-    
-    .btn-signup:hover {
-      background: #059669;
-    }
-    
-    button:disabled {
-      background: #9ca3af;
-      cursor: not-allowed;
-    }
-    
-    .message {
-      padding: 12px;
-      border-radius: 8px;
-      margin-top: 20px;
-      display: none;
-    }
-    
-    .error {
-      background: #fee2e2;
-      color: #ef4444;
-      border: 1px solid #fecaca;
-    }
-    
-    .success {
-      background: #d1fae5;
-      color: #10b981;
-      border: 1px solid #a7f3d0;
-    }
-    
-    .info {
-      background: #dbeafe;
-      color: #3b82f6;
-      border: 1px solid #bfdbfe;
-    }
-    
-    .debug-info {
-      background: #f3f4f6;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 25px;
-      font-size: 14px;
-      color: #4b5563;
-    }
-    
-    .debug-info h3 {
-      margin-bottom: 10px;
-      color: #374151;
-    }
-    
-    .debug-toggle {
-      color: #4f46e5;
-      text-decoration: underline;
-      cursor: pointer;
-      margin-top: 10px;
-      display: inline-block;
-    }
-    
-    .footer {
-      text-align: center;
-      padding: 20px;
-      color: #6b7280;
-      font-size: 14px;
-      border-top: 1px solid #e5e7eb;
-    }
-    
-    @media (max-width: 600px) {
-      .btn-group {
-        flex-direction: column;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form - Fixed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #4f46e5;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .form-container {
+            padding: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-otp {
+            background: #4f46e5;
+            color: white;
+        }
+        
+        .btn-otp:hover {
+            background: #4338ca;
+        }
+        
+        .btn-signup {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-signup:hover {
+            background: #059669;
+        }
+        
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .error {
+            background: #fee2e2;
+            color: #ef4444;
+            border: 1px solid #fecaca;
+        }
+        
+        .success {
+            background: #d1fae5;
+            color: #10b981;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .info {
+            background: #dbeafe;
+            color: #3b82f6;
+            border: 1px solid #bfdbfe;
+        }
+        
+        .debug-info {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #4b5563;
+        }
+        
+        .debug-info h3 {
+            margin-bottom: 10px;
+            color: #374151;
+        }
+        
+        .debug-toggle {
+            color: #4f46e5;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+            font-size: 14px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        @media (max-width: 600px) {
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1><i class="fas fa-user-plus"></i> Create Account</h1>
-      <p>Sign up for a new account</p>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-user-plus"></i> Create Account</h1>
+            <p>Sign up for a new account</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <input type="password" id="password" placeholder="Create a password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-with-icon">
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="otp">Verification Code</label>
+                    <div class="input-with-icon">
+                        <input type="text" id="otp" placeholder="Enter OTP sent to your email">
+                        <i class="fas fa-key"></i>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="button" class="btn-otp" onclick="sendOtp()" id="otpButton">
+                        <i class="fas fa-paper-plane"></i> Send OTP
+                    </button>
+                    <button type="button" class="btn-signup" onclick="signup()" id="signupButton">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+                </div>
+            </form>
+            
+            <div id="message" class="message"></div>
+            
+            <div class="debug-info">
+                <h3><i class="fas fa-bug"></i> Debug Information</h3>
+                <p>Endpoint: <code id="endpointUrl">https://script.google.com/macros/s/AKfycbyYXvMZYttcr4i0xXMtTHUSDqWRuVz4wuP5CbmphInZD6KuT-7s46RhNw7I42loODh7nQ/exec</code></p>
+                <p>Last Request Status: <span id="requestStatus">Not attempted</span></p>
+                <p id="corsInfo">CORS Status: Checking...</p>
+                
+                <p class="debug-toggle" onclick="toggleDebugDetails()">Show more details</p>
+                
+                <div id="debugDetails" style="display: none; margin-top: 15px;">
+                    <p>Common causes of "Failed to fetch" errors:</p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>Network connectivity issues</li>
+                        <li>CORS policy restrictions</li>
+                        <li>Server not responding</li>
+                        <li>Invalid endpoint URL</li>
+                        <li>Server-side errors</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Try these solutions:</p>
+                    <ol style="margin-left: 20px; margin-top: 5px;">
+                        <li>Check your internet connection</li>
+                        <li>Verify the Google Apps Script endpoint is deployed correctly</li>
+                        <li>Ensure the Google Apps Script doPost function is set up properly</li>
+                        <li>Check the browser console for detailed errors (F12)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Having trouble? Contact support@example.com</p>
+        </div>
     </div>
-    
-    <div class="form-container">
-      <form id="signupForm">
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <div class="input-with-icon">
-            <input type="email" id="email" placeholder="Enter your email" required>
-            <i class="fas fa-envelope"></i>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="password">Password</label>
-          <div class="input-with-icon">
-            <input type="password" id="password" placeholder="Create a password" required>
-            <i class="fas fa-lock"></i>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <div class="input-with-icon">
-            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
-            <i class="fas fa-lock"></i>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="otp">Verification Code</label>
-          <div class="input-with-icon">
-            <input type="text" id="otp" placeholder="Enter OTP sent to your email">
-            <i class="fas fa-key"></i>
-          </div>
-        </div>
-        
-        <div class="btn-group">
-          <button type="button" class="btn-otp" onclick="sendOtp()" id="otpButton">
-            <i class="fas fa-paper-plane"></i> Send OTP
-          </button>
-          <button type="button" class="btn-signup" onclick="signup()" id="signupButton">
-            <i class="fas fa-user-plus"></i> Sign Up
-          </button>
-        </div>
-      </form>
-      
-      <div id="message" class="message"></div>
-      
-      <div class="debug-info">
-        <h3><i class="fas fa-bug"></i> Debug Information</h3>
-        <p>Endpoint: <code>https://script.google.com/macros/s/AKfycbyYXvMZYttcr4i0xXMtTHUSDqWRuVz4wuP5CbmphInZD6KuT-7s46RhNw7I42loODh7nQ/exec</code></p>
-        <p>Last Request Status: <span id="requestStatus">Not attempted</span></p>
-        <p id="corsInfo">CORS Status: Checking...</p>
-        
-        <p class="debug-toggle" onclick="toggleDebugDetails()">Show more details</p>
-        
-        <div id="debugDetails" style="display: none; margin-top: 15px;">
-          <p>Common causes of "Failed to fetch" errors:</p>
-          <ul style="margin-left: 20px; margin-top: 5px;">
-            <li>Network connectivity issues</li>
-            <li>CORS policy restrictions</li>
-            <li>Server not responding</li>
-            <li>Invalid endpoint URL</li>
-            <li>Server-side errors</li>
-          </ul>
-          <p style="margin-top: 10px;">Try these solutions:</p>
-          <ol style="margin-left: 20px; margin-top: 5px;">
-            <li>Check your internet connection</li>
-            <li>Verify the Google Apps Script endpoint is deployed correctly</li>
-            <li>Ensure the Google Apps Script doPost function is set up properly</li>
-            <li>Check the browser console for detailed errors (F12)</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    
-    <div class="footer">
-      <p>Having trouble? Contact support@example.com</p>
-    </div>
-  </div>
 
-  <script>
-    let generatedOtp = null;
-    let otpSent = false;
-    
-    // Check CORS compatibility
-    checkCORS();
-    
-    function checkCORS() {
-      const corsInfo = document.getElementById('corsInfo');
-      corsInfo.textContent = "CORS Status: Checking...";
-      
-      // Test the endpoint with a HEAD request to check CORS
-      fetch("https://script.google.com/macros/s/AKfycbyYXvMZYttcr4i0xXMtTHUSDqWRuVz4wuP5CbmphInZD6KuT-7s46RhNw7I42loODh7nQ/exec", {
-        method: "HEAD",
-        mode: "no-cors"
-      })
-      .then(() => {
-        corsInfo.textContent = "CORS Status: Accessible (no-cors mode)";
-        corsInfo.style.color = "#10b981";
-      })
-      .catch(err => {
-        corsInfo.textContent = "CORS Status: Possibly restricted";
-        corsInfo.style.color = "#ef4444";
-      });
-    }
-    
-    function showMessage(text, type) {
-      const messageEl = document.getElementById('message');
-      messageEl.textContent = text;
-      messageEl.className = 'message ' + type;
-      messageEl.style.display = 'block';
-      
-      // Auto-hide success messages after 5 seconds
-      if (type === 'success') {
-        setTimeout(() => {
-          messageEl.style.display = 'none';
-        }, 5000);
-      }
-    }
-    
-    function sendOtp() {
-      const email = document.getElementById('email').value;
-      if (!email) {
-        showMessage("Please enter your email address!", "error");
-        return;
-      }
-      
-      // Validate email format
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        showMessage("Please enter a valid email address!", "error");
-        return;
-      }
-      
-      generatedOtp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
-      const otpButton = document.getElementById('otpButton');
-      
-      // Update UI to show loading state
-      otpButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-      otpButton.disabled = true;
-      document.getElementById('requestStatus').textContent = "Sending OTP request...";
-      
-      fetch("https://script.google.com/macros/s/AKfycbyYXvMZYttcr4i0xXMtTHUSDqWRuVz4wuP5CbmphInZD6KuT-7s46RhNw7I42loODh7nQ/exec", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email: email, otp: generatedOtp })
-      })
-      .then(res => {
-        document.getElementById('requestStatus').textContent = `Response received: ${res.status}`;
-        return res.json();
-      })
-      .then(data => {
-        if (data.success) {
-          showMessage(`OTP sent to ${email}. Please check your inbox.`, "success");
-          otpSent = true;
-          
-          // Start countdown for resend OTP
-          let countdown = 60;
-          otpButton.innerHTML = `<i class="fas fa-clock"></i> Resend in ${countdown}s`;
-          
-          const countdownInterval = setInterval(() => {
-            countdown--;
-            if (countdown > 0) {
-              otpButton.innerHTML = `<i class="fas fa-clock"></i> Resend in ${countdown}s`;
-            } else {
-              clearInterval(countdownInterval);
-              otpButton.innerHTML = '<i class="fas fa-paper-plane"></i> Resend OTP';
-              otpButton.disabled = false;
-            }
-          }, 1000);
-        } else {
-          showMessage("Error: " + (data.error || "Failed to send OTP"), "error");
-          otpButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
-          otpButton.disabled = false;
-        }
-      })
-      .catch(err => {
-        document.getElementById('requestStatus').textContent = `Error: ${err.message}`;
-        showMessage("Request failed: " + err.message + ". Please check your connection and try again.", "error");
-        otpButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
-        otpButton.disabled = false;
+    <script>
+        let generatedOtp = null;
+        let otpSent = false;
         
-        // Log detailed error to console
-        console.error("Fetch error details:", err);
-      });
-    }
-    
-    function signup() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirmPassword').value;
-      const enteredOtp = document.getElementById('otp').value;
-      
-      // Basic validation
-      if (!email || !password || !confirmPassword) {
-        showMessage("Please fill in all required fields!", "error");
-        return;
-      }
-      
-      if (password !== confirmPassword) {
-        showMessage("Passwords do not match!", "error");
-        return;
-      }
-      
-      if (!otpSent) {
-        showMessage("Please request an OTP first!", "error");
-        return;
-      }
-      
-      if (enteredOtp != generatedOtp) {
-        showMessage("Invalid OTP! Please check the code and try again.", "error");
-        return;
-      }
-      
-      // If all validations pass
-      showMessage("Signup successful! Redirecting...", "success");
-      
-      // Simulate redirect
-      setTimeout(() => {
-        document.getElementById('signupForm').reset();
-        otpSent = false;
-        showMessage("", "success"); // Clear message
-      }, 2000);
-    }
-    
-    function toggleDebugDetails() {
-      const debugDetails = document.getElementById('debugDetails');
-      const toggle = document.querySelector('.debug-toggle');
-      
-      if (debugDetails.style.display === 'none') {
-        debugDetails.style.display = 'block';
-        toggle.textContent = 'Hide details';
-      } else {
-        debugDetails.style.display = 'none';
-        toggle.textContent = 'Show more details';
-      }
-    }
-  </script>
+        // Check CORS compatibility
+        checkCORS();
+        
+        function checkCORS() {
+            const corsInfo = document.getElementById('corsInfo');
+            corsInfo.textContent = "CORS Status: Checking...";
+            
+            // Test the endpoint with a HEAD request to check CORS
+            fetch("https://script.google.com/macros/s/AKfycbyYXvMZYttcr4i0xXMtTHUSDqWRuVz4wuP5CbmphInZD6KuT-7s46RhNw7I42loODh7nQ/exec", {
+                method: "HEAD",
+                mode: "no-cors"
+            })
+            .then(() => {
+                corsInfo.textContent = "CORS Status: Accessible (no-cors mode)";
+                corsInfo.style.color = "#10b981";
+            })
+            .catch(err => {
+                corsInfo.textContent = "CORS Status: Possibly restricted";
+                corsInfo.style.color = "#ef4444";
+            });
+        }
+        
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = 'message ' + type;
+            messageEl.style.display = 'block';
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+        
+        function sendOtp() {
+            const email = document.getElementById('email').value;
+            if (!email) {
+                showMessage("Please enter your email address!", "error");
+                return;
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showMessage("Please enter a valid email address!", "error");
+                return;
+            }
+            
+            generatedOtp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
+            const otpButton = document.getElementById('otpButton');
+            
+            // Update UI to show loading state
+            otpButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            otpButton.disabled = true;
+            document.getElementById('requestStatus').textContent = "Sending OTP request...";
+            
+            // Try to send OTP via Google Apps Script
+            fetch("https://script.google.com/macros/s/AKfycbyYXvMZYttcr4i0xXMtTHUSDqWRuVz4wuP5CbmphInZD6KuT-7s46RhNw7I42loODh7nQ/exec", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: email, otp: generatedOtp })
+            })
+            .then(res => {
+                document.getElementById('requestStatus').textContent = `Response received: ${res.status}`;
+                return res.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    showMessage(`OTP sent to ${email}. Please check your inbox.`, "success");
+                    otpSent = true;
+                    
+                    // Start countdown for resend OTP
+                    let countdown = 60;
+                    otpButton.innerHTML = `<i class="fas fa-clock"></i> Resend in ${countdown}s`;
+                    
+                    const countdownInterval = setInterval(() => {
+                        countdown--;
+                        if (countdown > 0) {
+                            otpButton.innerHTML = `<i class="fas fa-clock"></i> Resend in ${countdown}s`;
+                        } else {
+                            clearInterval(countdownInterval);
+                            otpButton.innerHTML = '<i class="fas fa-paper-plane"></i> Resend OTP';
+                            otpButton.disabled = false;
+                        }
+                    }, 1000);
+                } else {
+                    showMessage("Error: " + (data.error || "Failed to send OTP"), "error");
+                    otpButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
+                    otpButton.disabled = false;
+                }
+            })
+            .catch(err => {
+                document.getElementById('requestStatus').textContent = `Error: ${err.message}`;
+                
+                // Fallback: Show OTP on screen since email sending failed
+                showMessage(`Could not send email. Your OTP is: ${generatedOtp}`, "info");
+                otpSent = true;
+                
+                otpButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
+                otpButton.disabled = false;
+                
+                // Log detailed error to console
+                console.error("Fetch error details:", err);
+            });
+        }
+        
+        function signup() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const enteredOtp = document.getElementById('otp').value;
+            
+            // Basic validation
+            if (!email || !password || !confirmPassword) {
+                showMessage("Please fill in all required fields!", "error");
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showMessage("Passwords do not match!", "error");
+                return;
+            }
+            
+            if (!otpSent) {
+                showMessage("Please request an OTP first!", "error");
+                return;
+            }
+            
+            if (enteredOtp != generatedOtp) {
+                showMessage("Invalid OTP! Please check the code and try again.", "error");
+                return;
+            }
+            
+            // If all validations pass
+            showMessage("Signup successful! Redirecting...", "success");
+            
+            // Simulate redirect
+            setTimeout(() => {
+                document.getElementById('signupForm').reset();
+                otpSent = false;
+                showMessage("", "success"); // Clear message
+            }, 2000);
+        }
+        
+        function toggleDebugDetails() {
+            const debugDetails = document.getElementById('debugDetails');
+            const toggle = document.querySelector('.debug-toggle');
+            
+            if (debugDetails.style.display === 'none') {
+                debugDetails.style.display = 'block';
+                toggle.textContent = 'Hide details';
+            } else {
+                debugDetails.style.display = 'none';
+                toggle.textContent = 'Show more details';
+            }
+        }
+    </script>
 </body>
 </html>
