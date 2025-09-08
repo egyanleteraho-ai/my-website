@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Secure Account</title>
+    <title>Create Account - OTP Verification</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -24,7 +24,7 @@
         
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
             background: white;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -41,11 +41,12 @@
         .header h1 {
             font-weight: 600;
             font-size: 28px;
+            margin-bottom: 10px;
         }
         
         .header p {
-            margin-top: 8px;
             opacity: 0.9;
+            font-size: 16px;
         }
         
         .form-container {
@@ -83,6 +84,7 @@
             right: 15px;
             top: 42px;
             color: #777;
+            cursor: pointer;
         }
         
         .btn {
@@ -157,6 +159,13 @@
             text-decoration: underline;
         }
         
+        .countdown {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
         .password-rules {
             font-size: 13px;
             color: #666;
@@ -177,7 +186,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Create Your Account</h1>
+            <h1>Create Account</h1>
             <p>Secure signup with OTP verification</p>
         </div>
         
@@ -194,16 +203,22 @@
                 </div>
                 
                 <div class="input-group">
-                    <label for="email">Email Address</label>
+                    <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Enter your email" required>
                     <i class="fas fa-envelope"></i>
                 </div>
                 
                 <div class="input-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a strong password" required>
-                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Create a password" required>
+                    <i class="fas fa-eye" id="togglePassword"></i>
                     <div class="password-rules">Use at least 8 characters with a mix of letters, numbers and symbols</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                    <i class="fas fa-eye" id="toggleConfirmPassword"></i>
                 </div>
                 
                 <button id="sendOtpBtn" class="btn" onclick="sendOTP()">Send OTP</button>
@@ -216,11 +231,12 @@
                     <i class="fas fa-key"></i>
                 </div>
                 
-                <button id="verifyOtpBtn" class="btn" onclick="verifyOTP()">Verify OTP & Sign Up</button>
+                <button id="verifyOtpBtn" class="btn" onclick="verifyOTP()">Verify OTP & Create Account</button>
                 
                 <div class="resend">
-                    Didn't receive the code? <a onclick="resendOTP()">Resend OTP</a>
+                    Didn't receive the code? <a id="resendLink" onclick="resendOTP()">Resend OTP</a>
                 </div>
+                <div id="countdown" class="countdown"></div>
             </div>
         </div>
     </div>
@@ -237,6 +253,31 @@
         const otpSection = document.getElementById('otpSection');
         const sendOtpBtn = document.getElementById('sendOtpBtn');
         const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+        const resendLink = document.getElementById('resendLink');
+        const countdownEl = document.getElementById('countdown');
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const passwordField = document.getElementById('password');
+        const confirmPasswordField = document.getElementById('confirmPassword');
+        
+        // State variables
+        let generatedOtp = '';
+        let otpExpiryTime = 0;
+        let resendTimer = null;
+        
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+        
+        // Toggle confirm password visibility
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordField.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
         
         // Show message function
         function showMessage(element, message) {
@@ -258,11 +299,38 @@
             return password.length >= 8;
         }
         
+        // Generate a random OTP
+        function generateOTP() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+        
+        // Start the resend countdown
+        function startResendCountdown() {
+            resendLink.style.pointerEvents = 'none';
+            resendLink.style.opacity = '0.5';
+            
+            let timeLeft = 30;
+            countdownEl.textContent = `You can resend OTP in ${timeLeft} seconds`;
+            
+            resendTimer = setInterval(() => {
+                timeLeft--;
+                countdownEl.textContent = `You can resend OTP in ${timeLeft} seconds`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(resendTimer);
+                    resendLink.style.pointerEvents = 'auto';
+                    resendLink.style.opacity = '1';
+                    countdownEl.textContent = '';
+                }
+            }, 1000);
+        }
+        
         // Send OTP to the provided email
         function sendOTP() {
             const email = document.getElementById('email').value;
             const fullName = document.getElementById('fullName').value;
             const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
             
             // Validate inputs
             if (!fullName) {
@@ -280,6 +348,11 @@
                 return;
             }
             
+            if (password !== confirmPassword) {
+                showMessage(errorMsg, 'Passwords do not match');
+                return;
+            }
+            
             // Disable button during request
             sendOtpBtn.disabled = true;
             sendOtpBtn.textContent = 'Sending OTP...';
@@ -287,34 +360,89 @@
             // Show info message
             showMessage(infoMsg, 'Sending OTP to your email...');
             
-            // Make request to Google Apps Script
+            // Generate OTP and set expiry (5 minutes from now)
+            generatedOtp = generateOTP();
+            otpExpiryTime = Date.now() + 5 * 60 * 1000; // 5 minutes
+            
+            // In a real implementation, this would call your Google Apps Script
+            // For demonstration, we'll simulate the API call
             fetch(scriptUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    action: 'sendOTP',
-                    email: email
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        action: 'sendOTP',
+        email: email
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        showMessage(successMsg, 'OTP sent successfully! Check your email.');
+        otpSection.style.display = 'block';
+        startResendCountdown();
+    } else {
+        showMessage(errorMsg, data.message || 'Failed to send OTP. Please try again.');
+    }
+})
+.catch(error => {
+    showMessage(errorMsg, 'An error occurred. Please try again.');
+    console.error('Error:', error);
+})
+.finally(() => {
+    sendOtpBtn.disabled = false;
+    sendOtpBtn.textContent = 'Send OTP';
+});
+;
+        }
+        
+        // Simulate sending OTP (replace with actual API call)
+        function simulateSendOTP(email, otp) {
+            console.log(`Simulating OTP send to ${email} with code: ${otp}`);
+            
+            // Simulate network delay
+            setTimeout(() => {
+                // In a real implementation, you would use:
+                /*
+                fetch(scriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'sendOTP',
+                        email: email
+                    })
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showMessage(successMsg, 'OTP sent successfully! Check your email.');
-                    otpSection.style.display = 'block';
-                } else {
-                    showMessage(errorMsg, data.message || 'Failed to send OTP. Please try again.');
-                }
-            })
-            .catch(error => {
-                showMessage(errorMsg, 'An error occurred. Please try again.');
-                console.error('Error:', error);
-            })
-            .finally(() => {
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showMessage(successMsg, 'OTP sent successfully! Check your email.');
+                        otpSection.style.display = 'block';
+                        startResendCountdown();
+                    } else {
+                        showMessage(errorMsg, data.message || 'Failed to send OTP. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    showMessage(errorMsg, 'An error occurred. Please try again.');
+                    console.error('Error:', error);
+                })
+                .finally(() => {
+                    sendOtpBtn.disabled = false;
+                    sendOtpBtn.textContent = 'Send OTP';
+                });
+                */
+                
+                // Simulation response
+                showMessage(successMsg, 'OTP sent successfully! Check your email.');
+                otpSection.style.display = 'block';
+                startResendCountdown();
+                
                 sendOtpBtn.disabled = false;
                 sendOtpBtn.textContent = 'Send OTP';
-            });
+            }, 1500);
         }
         
         // Verify the OTP entered by the user
@@ -329,6 +457,18 @@
                 return;
             }
             
+            // Check if OTP has expired
+            if (Date.now() > otpExpiryTime) {
+                showMessage(errorMsg, 'OTP has expired. Please request a new one.');
+                return;
+            }
+            
+            // Check if OTP matches
+            if (otp !== generatedOtp) {
+                showMessage(errorMsg, 'Invalid OTP. Please try again.');
+                return;
+            }
+            
             // Disable button during request
             verifyOtpBtn.disabled = true;
             verifyOtpBtn.textContent = 'Verifying...';
@@ -336,80 +476,188 @@
             // Show info message
             showMessage(infoMsg, 'Verifying OTP...');
             
-            // Make request to Google Apps Script
-            fetch(scriptUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    action: 'verifyOTP',
-                    email: email,
-                    otp: otp
+            // In a real implementation, this would call your Google Apps Script
+            // For demonstration, we'll simulate the API call
+           fetch(scriptUrl, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        action: 'verifyOTP',
+        email: email,
+        otp: otp
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        showMessage(successMsg, 'OTP verified successfully!');
+        submitToGoogleForm(fullName, email, password);
+    } else {
+        showMessage(errorMsg, data.message || 'Invalid OTP. Please try again.');
+        verifyOtpBtn.disabled = false;
+        verifyOtpBtn.textContent = 'Verify OTP & Create Account';
+    }
+})
+.catch(error => {
+    showMessage(errorMsg, 'An error occurred. Please try again.');
+    console.error('Error:', error);
+    verifyOtpBtn.disabled = false;
+    verifyOtpBtn.textContent = 'Verify OTP & Create Account';
+});
+;
+        }
+        
+        // Simulate verifying OTP (replace with actual API call)
+        function simulateVerifyOTP(email, otp, fullName, password) {
+            console.log(`Simulating OTP verification for ${email} with code: ${otp}`);
+            
+            // Simulate network delay
+            setTimeout(() => {
+                // In a real implementation, you would use:
+                /*
+                fetch(scriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'verifyOTP',
+                        email: email,
+                        otp: otp
+                    })
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showMessage(successMsg, 'OTP verified successfully!');
-                    // Submit data to Google Form
-                    submitToGoogleForm(fullName, email, password);
-                } else {
-                    showMessage(errorMsg, data.message || 'Invalid OTP. Please try again.');
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showMessage(successMsg, 'OTP verified successfully!');
+                        submitToGoogleForm(fullName, email, password);
+                    } else {
+                        showMessage(errorMsg, data.message || 'Invalid OTP. Please try again.');
+                        verifyOtpBtn.disabled = false;
+                        verifyOtpBtn.textContent = 'Verify OTP & Create Account';
+                    }
+                })
+                .catch(error => {
+                    showMessage(errorMsg, 'An error occurred. Please try again.');
+                    console.error('Error:', error);
                     verifyOtpBtn.disabled = false;
-                    verifyOtpBtn.textContent = 'Verify OTP & Sign Up';
-                }
-            })
-            .catch(error => {
-                showMessage(errorMsg, 'An error occurred. Please try again.');
-                console.error('Error:', error);
-                verifyOtpBtn.disabled = false;
-                verifyOtpBtn.textContent = 'Verify OTP & Sign Up';
-            });
+                    verifyOtpBtn.textContent = 'Verify OTP & Create Account';
+                });
+                */
+                
+                // Simulation response
+                showMessage(successMsg, 'OTP verified successfully!');
+                submitToGoogleForm(fullName, email, password);
+            }, 1500);
         }
         
         // Submit data to Google Form
         function submitToGoogleForm(fullName, email, password) {
-            // Create a form data object
-            const formData = new FormData();
-            formData.append('entry.1690951564', fullName); // Replace with actual field ID
-            formData.append('entry.193299761', email);    // Replace with actual field ID
-            formData.append('entry.319455608', password); // Replace with actual field ID
+            // Show info message
+            showMessage(infoMsg, 'Creating your account...');
             
-            // Submit to Google Form
-            fetch(formUrl, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    showMessage(successMsg, 'Account created successfully! You will be redirected shortly.');
+            // In a real implementation, this would submit to your Google Form
+            // For demonstration, we'll simulate the form submission
+           const formData = new FormData();
+// Replace these field IDs with the actual ones from your Google Form
+formData.append('entry.1690951564', fullName);
+formData.append('entry.193299761', email);
+formData.append('entry.319455608', password);
+
+fetch(formUrl, {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+})
+.then(() => {
+    showMessage(successMsg, 'Account created successfully! You can now login.');
+    // Reset form
+    document.getElementById('signupForm').reset();
+    otpSection.style.display = 'none';
+})
+.catch(error => {
+    showMessage(errorMsg, 'Form submission failed. Please contact support.');
+    console.error('Error:', error);
+})
+.finally(() => {
+    verifyOtpBtn.disabled = false;
+    verifyOtpBtn.textContent = 'Verify OTP & Create Account';
+});
+;
+        }
+        
+        // Simulate Google Form submission (replace with actual form submission)
+        function simulateGoogleFormSubmission(fullName, email, password) {
+            console.log(`Simulating form submission: ${fullName}, ${email}, ${password}`);
+            
+            // Simulate network delay
+            setTimeout(() => {
+                // In a real implementation, you would use:
+                /*
+                const formData = new FormData();
+                // Replace these field IDs with the actual ones from your Google Form
+                formData.append('entry.1234567890', fullName);
+                formData.append('entry.1234567891', email);
+                formData.append('entry.1234567892', password);
+                
+                fetch(formUrl, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                })
+                .then(() => {
+                    showMessage(successMsg, 'Account created successfully! You can now login.');
                     // Reset form
                     document.getElementById('signupForm').reset();
                     otpSection.style.display = 'none';
-                    
-                    // Redirect after a delay
-                    setTimeout(() => {
-                        window.location.href = 'https://example.com/welcome'; // Change to your welcome page
-                    }, 3000);
-                } else {
-                    showMessage(errorMsg, 'Form submission failed. Please try again.');
-                }
-            })
-            .catch(error => {
-                showMessage(errorMsg, 'An error occurred during form submission.');
-                console.error('Error:', error);
-            })
-            .finally(() => {
+                })
+                .catch(error => {
+                    showMessage(errorMsg, 'Form submission failed. Please contact support.');
+                    console.error('Error:', error);
+                })
+                .finally(() => {
+                    verifyOtpBtn.disabled = false;
+                    verifyOtpBtn.textContent = 'Verify OTP & Create Account';
+                });
+                */
+                
+                // Simulation response
+                showMessage(successMsg, 'Account created successfully! You can now login with your email and password.');
+                // Reset form
+                document.getElementById('signupForm').reset();
+                document.getElementById('otp').value = '';
+                otpSection.style.display = 'none';
+                
                 verifyOtpBtn.disabled = false;
-                verifyOtpBtn.textContent = 'Verify OTP & Sign Up';
-            });
+                verifyOtpBtn.textContent = 'Verify OTP & Create Account';
+            }, 1500);
         }
         
         // Resend OTP
         function resendOTP() {
+            const email = document.getElementById('email').value;
+            
+            if (!email || !isValidEmail(email)) {
+                showMessage(errorMsg, 'Please enter a valid email address');
+                return;
+            }
+            
             showMessage(infoMsg, 'Resending OTP...');
-            sendOTP();
+            
+            // Generate new OTP
+            generatedOtp = generateOTP();
+            otpExpiryTime = Date.now() + 5 * 60 * 1000; // 5 minutes
+ const formUrl = 'https://docs.google.com/forms/d/1pRVzxch_8J47sSfGM8UC-FxlMnf8NlYEDWohWTZfgsQ/edit#responses';
+
+           
+            // In a real implementation, this would call your Google Apps Script
+            simulateSendOTP(email, generatedOtp);
+            
+            // Restart the countdown
+            if (resendTimer) clearInterval(resendTimer);
+            startResendCountdown();
         }
         
         // Allow form submission on Enter key
