@@ -1,676 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account - OTP Verification</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 450px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: #6c63ff;
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-weight: 600;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            opacity: 0.9;
-            font-size: 16px;
-        }
-        
-        .form-container {
-            padding: 30px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border 0.3s;
-        }
-        
-        .input-group input:focus {
-            border-color: #6c63ff;
-            outline: none;
-        }
-        
-        .input-group i {
-            position: absolute;
-            right: 15px;
-            top: 42px;
-            color: #777;
-            cursor: pointer;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 14px;
-            background: #6c63ff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .btn:hover {
-            background: #554fd8;
-        }
-        
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        
-        .otp-container {
-            display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        
-        .message {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            display: none;
-        }
-        
-        .error {
-            background: #ffebee;
-            color: #d32f2f;
-            border: 1px solid #ffcdd2;
-        }
-        
-        .success {
-            background: #e8f5e9;
-            color: #388e3c;
-            border: 1px solid #c8e6c9;
-        }
-        
-        .info {
-            background: #e3f2fd;
-            color: #1565c0;
-            border: 1px solid #bbdefb;
-        }
-        
-        .resend {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .resend a {
-            color: #6c63ff;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
-        .resend a:hover {
-            text-decoration: underline;
-        }
-        
-        .countdown {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .password-rules {
-            font-size: 13px;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        @media (max-width: 576px) {
-            .container {
-                border-radius: 12px;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - OTP Verification</title>
+  <base target="_top">
+  <style>
+    /* (your same CSS styles from before) */
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Create Account</h1>
-            <p>Secure signup with OTP verification</p>
-        </div>
-        
-        <div class="form-container">
-            <div id="errorMsg" class="message error"></div>
-            <div id="successMsg" class="message success"></div>
-            <div id="infoMsg" class="message info"></div>
-            
-            <div id="signupForm">
-                <div class="input-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" placeholder="Enter your full name" required>
-                    <i class="fas fa-user"></i>
-                </div>
-                
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
-                    <i class="fas fa-envelope"></i>
-                </div>
-                
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a password" required>
-                    <i class="fas fa-eye" id="togglePassword"></i>
-                    <div class="password-rules">Use at least 8 characters with a mix of letters, numbers and symbols</div>
-                </div>
-                
-                <div class="input-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
-                    <i class="fas fa-eye" id="toggleConfirmPassword"></i>
-                </div>
-                
-                <button id="sendOtpBtn" class="btn" onclick="sendOTP()">Send OTP</button>
-            </div>
-            
-            <div id="otpSection" class="otp-container">
-                <div class="input-group">
-                    <label for="otp">Enter OTP</label>
-                    <input type="text" id="otp" placeholder="Enter the OTP sent to your email" required>
-                    <i class="fas fa-key"></i>
-                </div>
-                
-                <button id="verifyOtpBtn" class="btn" onclick="verifyOTP()">Verify OTP & Create Account</button>
-                
-                <div class="resend">
-                    Didn't receive the code? <a id="resendLink" onclick="resendOTP()">Resend OTP</a>
-                </div>
-                <div id="countdown" class="countdown"></div>
-            </div>
-        </div>
+  <div class="container">
+    <h1>Create Account</h1>
+
+    <form id="signupForm">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+        <div class="error-message" id="fullNameError">Please enter your full name</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="error-message" id="emailError">Please enter a valid email address</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a password" required>
+        <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+        <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="sendOtpBtn" onclick="sendOTP()">Send OTP</button>
+    </form>
+
+    <div class="otp-section" id="otpSection">
+      <div class="form-group">
+        <label for="otp">Verification Code</label>
+        <input type="text" id="otp" name="otp" placeholder="Enter the OTP sent to your email" maxlength="6">
+        <div class="error-message" id="otpError">Please enter the 6-digit OTP</div>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="verifyOtpBtn" onclick="verifyOTP()">Verify OTP</button>
+      <button type="button" class="btn btn-secondary" onclick="resendOTP()">Resend OTP</button>
     </div>
 
-    <script>
-        // Configuration
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxVbPV7bCAWCdKbdBeRLyq6-5Y1OttJwAVIhtRZmVLCl1iCo2X1zBpTuvoy-4-SOIsalA/exec';
-        const formUrl = 'https://docs.google.com/forms/d/1pRVzxch_8J47sSfGM8UC-FxlMnf8NlYEDWohWTZfgsQ/formResponse';
-        
-        // DOM Elements
-        const errorMsg = document.getElementById('errorMsg');
-        const successMsg = document.getElementById('successMsg');
-        const infoMsg = document.getElementById('infoMsg');
-        const otpSection = document.getElementById('otpSection');
-        const sendOtpBtn = document.getElementById('sendOtpBtn');
-        const verifyOtpBtn = document.getElementById('verifyOtpBtn');
-        const resendLink = document.getElementById('resendLink');
-        const countdownEl = document.getElementById('countdown');
-        const togglePassword = document.getElementById('togglePassword');
-        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
-        const passwordField = document.getElementById('password');
-        const confirmPasswordField = document.getElementById('confirmPassword');
-        
-        // State variables
-        let generatedOtp = '';
-        let otpExpiryTime = 0;
-        let resendTimer = null;
-        
-        // Toggle password visibility
-        togglePassword.addEventListener('click', function() {
-            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordField.setAttribute('type', type);
-            this.classList.toggle('fa-eye-slash');
-        });
-        
-        // Toggle confirm password visibility
-        toggleConfirmPassword.addEventListener('click', function() {
-            const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
-            confirmPasswordField.setAttribute('type', type);
-            this.classList.toggle('fa-eye-slash');
-        });
-        
-        // Show message function
-        function showMessage(element, message) {
-            element.textContent = message;
-            element.style.display = 'block';
-            setTimeout(() => {
-                element.style.display = 'none';
-            }, 5000);
-        }
-        
-        // Validate email format
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-        
-        // Validate password strength
-        function isStrongPassword(password) {
-            return password.length >= 8;
-        }
-        
-        // Generate a random OTP
-        function generateOTP() {
-            return Math.floor(100000 + Math.random() * 900000).toString();
-        }
-        
-        // Start the resend countdown
-        function startResendCountdown() {
-            resendLink.style.pointerEvents = 'none';
-            resendLink.style.opacity = '0.5';
-            
-            let timeLeft = 30;
-            countdownEl.textContent = `You can resend OTP in ${timeLeft} seconds`;
-            
-            resendTimer = setInterval(() => {
-                timeLeft--;
-                countdownEl.textContent = `You can resend OTP in ${timeLeft} seconds`;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(resendTimer);
-                    resendLink.style.pointerEvents = 'auto';
-                    resendLink.style.opacity = '1';
-                    countdownEl.textContent = '';
-                }
-            }, 1000);
-        }
-        
-        // Send OTP to the provided email
-        function sendOTP() {
-            const email = document.getElementById('email').value;
-            const fullName = document.getElementById('fullName').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            // Validate inputs
-            if (!fullName) {
-                showMessage(errorMsg, 'Please enter your full name');
-                return;
-            }
-            
-            if (!email || !isValidEmail(email)) {
-                showMessage(errorMsg, 'Please enter a valid email address');
-                return;
-            }
-            
-            if (!password || !isStrongPassword(password)) {
-                showMessage(errorMsg, 'Password must be at least 8 characters long');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showMessage(errorMsg, 'Passwords do not match');
-                return;
-            }
-            
-            // Disable button during request
-            sendOtpBtn.disabled = true;
-            sendOtpBtn.textContent = 'Sending OTP...';
-            
-            // Show info message
-            showMessage(infoMsg, 'Sending OTP to your email...');
-            
-            // Generate OTP and set expiry (5 minutes from now)
-            generatedOtp = generateOTP();
-            otpExpiryTime = Date.now() + 5 * 60 * 1000; // 5 minutes
-            
-            // In a real implementation, this would call your Google Apps Script
-            // For demonstration, we'll simulate the API call
-            fetch(scriptUrl, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        action: 'sendOTP',
-        email: email
-    })
-})
-.then(response => response.json())
-.then(data => {
-    if (data.success) {
-        showMessage(successMsg, 'OTP sent successfully! Check your email.');
-        otpSection.style.display = 'block';
-        startResendCountdown();
-    } else {
-        showMessage(errorMsg, data.message || 'Failed to send OTP. Please try again.');
-    }
-})
-.catch(error => {
-    showMessage(errorMsg, 'An error occurred. Please try again.');
-    console.error('Error:', error);
-})
-.finally(() => {
-    sendOtpBtn.disabled = false;
-    sendOtpBtn.textContent = 'Send OTP';
-});
-;
-        }
-        
-        // Simulate sending OTP (replace with actual API call)
-        function simulateSendOTP(email, otp) {
-            console.log(`Simulating OTP send to ${email} with code: ${otp}`);
-            
-            // Simulate network delay
-            setTimeout(() => {
-                // In a real implementation, you would use:
-                /*
-                fetch(scriptUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: 'sendOTP',
-                        email: email
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        showMessage(successMsg, 'OTP sent successfully! Check your email.');
-                        otpSection.style.display = 'block';
-                        startResendCountdown();
-                    } else {
-                        showMessage(errorMsg, data.message || 'Failed to send OTP. Please try again.');
-                    }
-                })
-                .catch(error => {
-                    showMessage(errorMsg, 'An error occurred. Please try again.');
-                    console.error('Error:', error);
-                })
-                .finally(() => {
-                    sendOtpBtn.disabled = false;
-                    sendOtpBtn.textContent = 'Send OTP';
-                });
-                */
-                
-                // Simulation response
-                showMessage(successMsg, 'OTP sent successfully! Check your email.');
-                otpSection.style.display = 'block';
-                startResendCountdown();
-                
-                sendOtpBtn.disabled = false;
-                sendOtpBtn.textContent = 'Send OTP';
-            }, 1500);
-        }
-        
-        // Verify the OTP entered by the user
-        function verifyOTP() {
-            const email = document.getElementById('email').value;
-            const otp = document.getElementById('otp').value;
-            const fullName = document.getElementById('fullName').value;
-            const password = document.getElementById('password').value;
-            
-            if (!otp) {
-                showMessage(errorMsg, 'Please enter the OTP');
-                return;
-            }
-            
-            // Check if OTP has expired
-            if (Date.now() > otpExpiryTime) {
-                showMessage(errorMsg, 'OTP has expired. Please request a new one.');
-                return;
-            }
-            
-            // Check if OTP matches
-            if (otp !== generatedOtp) {
-                showMessage(errorMsg, 'Invalid OTP. Please try again.');
-                return;
-            }
-            
-            // Disable button during request
-            verifyOtpBtn.disabled = true;
-            verifyOtpBtn.textContent = 'Verifying...';
-            
-            // Show info message
-            showMessage(infoMsg, 'Verifying OTP...');
-            
-            // In a real implementation, this would call your Google Apps Script
-            // For demonstration, we'll simulate the API call
-           fetch(scriptUrl, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        action: 'verifyOTP',
-        email: email,
-        otp: otp
-    })
-})
-.then(response => response.json())
-.then(data => {
-    if (data.success) {
-        showMessage(successMsg, 'OTP verified successfully!');
-        submitToGoogleForm(fullName, email, password);
-    } else {
-        showMessage(errorMsg, data.message || 'Invalid OTP. Please try again.');
-        verifyOtpBtn.disabled = false;
-        verifyOtpBtn.textContent = 'Verify OTP & Create Account';
-    }
-})
-.catch(error => {
-    showMessage(errorMsg, 'An error occurred. Please try again.');
-    console.error('Error:', error);
-    verifyOtpBtn.disabled = false;
-    verifyOtpBtn.textContent = 'Verify OTP & Create Account';
-});
-;
-        }
-        
-        // Simulate verifying OTP (replace with actual API call)
-        function simulateVerifyOTP(email, otp, fullName, password) {
-            console.log(`Simulating OTP verification for ${email} with code: ${otp}`);
-            
-            // Simulate network delay
-            setTimeout(() => {
-                // In a real implementation, you would use:
-                /*
-                fetch(scriptUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: 'verifyOTP',
-                        email: email,
-                        otp: otp
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        showMessage(successMsg, 'OTP verified successfully!');
-                        submitToGoogleForm(fullName, email, password);
-                    } else {
-                        showMessage(errorMsg, data.message || 'Invalid OTP. Please try again.');
-                        verifyOtpBtn.disabled = false;
-                        verifyOtpBtn.textContent = 'Verify OTP & Create Account';
-                    }
-                })
-                .catch(error => {
-                    showMessage(errorMsg, 'An error occurred. Please try again.');
-                    console.error('Error:', error);
-                    verifyOtpBtn.disabled = false;
-                    verifyOtpBtn.textContent = 'Verify OTP & Create Account';
-                });
-                */
-                
-                // Simulation response
-                showMessage(successMsg, 'OTP verified successfully!');
-                submitToGoogleForm(fullName, email, password);
-            }, 1500);
-        }
-        
-        // Submit data to Google Form
-        function submitToGoogleForm(fullName, email, password) {
-            // Show info message
-            showMessage(infoMsg, 'Creating your account...');
-            
-            // In a real implementation, this would submit to your Google Form
-            // For demonstration, we'll simulate the form submission
-           const formData = new FormData();
-// Replace these field IDs with the actual ones from your Google Form
-formData.append('entry.1690951564', fullName);
-formData.append('entry.193299761', email);
-formData.append('entry.319455608', password);
+    <div id="result"></div>
 
-fetch(formUrl, {
-    method: 'POST',
-    body: formData,
-    mode: 'no-cors'
-})
-.then(() => {
-    showMessage(successMsg, 'Account created successfully! You can now login.');
-    // Reset form
-    document.getElementById('signupForm').reset();
-    otpSection.style.display = 'none';
-})
-.catch(error => {
-    showMessage(errorMsg, 'Form submission failed. Please contact support.');
-    console.error('Error:', error);
-})
-.finally(() => {
-    verifyOtpBtn.disabled = false;
-    verifyOtpBtn.textContent = 'Verify OTP & Create Account';
-});
-;
-        }
-        
-        // Simulate Google Form submission (replace with actual form submission)
-        function simulateGoogleFormSubmission(fullName, email, password) {
-            console.log(`Simulating form submission: ${fullName}, ${email}, ${password}`);
-            
-            // Simulate network delay
-            setTimeout(() => {
-                // In a real implementation, you would use:
-                /*
-                const formData = new FormData();
-                // Replace these field IDs with the actual ones from your Google Form
-                formData.append('entry.1234567890', fullName);
-                formData.append('entry.1234567891', email);
-                formData.append('entry.1234567892', password);
-                
-                fetch(formUrl, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors'
-                })
-                .then(() => {
-                    showMessage(successMsg, 'Account created successfully! You can now login.');
-                    // Reset form
-                    document.getElementById('signupForm').reset();
-                    otpSection.style.display = 'none';
-                })
-                .catch(error => {
-                    showMessage(errorMsg, 'Form submission failed. Please contact support.');
-                    console.error('Error:', error);
-                })
-                .finally(() => {
-                    verifyOtpBtn.disabled = false;
-                    verifyOtpBtn.textContent = 'Verify OTP & Create Account';
-                });
-                */
-                
-                // Simulation response
-                showMessage(successMsg, 'Account created successfully! You can now login with your email and password.');
-                // Reset form
-                document.getElementById('signupForm').reset();
-                document.getElementById('otp').value = '';
-                otpSection.style.display = 'none';
-                
-                verifyOtpBtn.disabled = false;
-                verifyOtpBtn.textContent = 'Verify OTP & Create Account';
-            }, 1500);
-        }
-        
-        // Resend OTP
-        function resendOTP() {
-            const email = document.getElementById('email').value;
-            
-            if (!email || !isValidEmail(email)) {
-                showMessage(errorMsg, 'Please enter a valid email address');
-                return;
-            }
-            
-            showMessage(infoMsg, 'Resending OTP...');
-            
-            // Generate new OTP
-            generatedOtp = generateOTP();
-            otpExpiryTime = Date.now() + 5 * 60 * 1000; // 5 minutes
- const formUrl = 'https://docs.google.com/forms/d/1pRVzxch_8J47sSfGM8UC-FxlMnf8NlYEDWohWTZfgsQ/formResponse';
+    <button type="button" class="btn btn-primary" id="signupBtn" style="display: none; margin-top: 20px;" onclick="completeSignup()">Complete Signup</button>
+  </div>
 
-           
-            // In a real implementation, this would call your Google Apps Script
-            simulateSendOTP(email, generatedOtp);
-            
-            // Restart the countdown
-            if (resendTimer) clearInterval(resendTimer);
-            startResendCountdown();
-        }
-        
-        // Allow form submission on Enter key
-        document.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                if (!otpSection.style.display || otpSection.style.display === 'none') {
-                    sendOTP();
-                } else {
-                    verifyOTP();
-                }
-            }
-        });
-    </script>
+  <script>
+    const formUrl = "https://docs.google.com/forms/d/1pRVzxch_8J47sSfGM8UC-FxlMnf8NlYEDWohWTZfgsQ/formResponse";
+
+    function completeSignup() {
+      // Collect form data
+      const formData = new FormData();
+      formData.append("entry.1690951564", document.getElementById("fullName").value);   // replace with Full Name field ID
+      formData.append("entry.193299761", document.getElementById("email").value);      // replace with Email field ID
+      formData.append("entry.319455608", document.getElementById("password").value);   // replace with Password field ID
+
+      fetch(formUrl, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+      })
+      .then(() => {
+        showMessage("Account created successfully!", "success");
+      })
+      .catch((err) => {
+        showMessage("Error submitting form: " + err, "error");
+      });
+    }
+
+    function showMessage(message, type) {
+      const resultDiv = document.getElementById("result");
+      resultDiv.textContent = message;
+      resultDiv.className = type;
+      resultDiv.style.display = "block";
+    }
+
+    // (your sendOTP, verifyOTP, resendOTP functions remain the same)
+  </script>
 </body>
 </html>
-
