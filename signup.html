@@ -285,7 +285,7 @@
             corsInfo.textContent = "CORS Status: Checking...";
             
             // Test the endpoint with a HEAD request to check CORS
-            fetch("https://script.google.com/macros/library/d/1Z6BQ33CZWiVnSoEHzCbdUNZtHJUqOjYANfhFa-UrGTT0UjCrrkgVBWRf/2", {
+            fetch("https://script.google.com/macros/s/AKfycbx7ILenEenKB6nNddwcgZltGiDn0xmQQ1uc4Ft-Oh41yL8wzEyR4TDzxQX3xorn-XK0pw/exec", {
                 method: "HEAD",
                 mode: "no-cors"
             })
@@ -336,7 +336,7 @@
             document.getElementById('requestStatus').textContent = "Sending OTP request...";
             
             // Try to send OTP via Google Apps Script
-            fetch("https://script.google.com/macros/s/AKfycbyYXvMZYttcr4i0xXMtTHUSDqWRuVz4wuP5CbmphInZD6KuT-7s46RhNw7I42loODh7nQ/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbx7ILenEenKB6nNddwcgZltGiDn0xmQQ1uc4Ft-Oh41yL8wzEyR4TDzxQX3xorn-XK0pw/exec", {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json"
