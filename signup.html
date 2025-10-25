@@ -3,91 +3,355 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - OTP Verification</title>
-  <base target="_top">
+  <title>Sign Up - SparkLearn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* (your same CSS styles from before) */
+    .loader {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #6366f1;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .form-step {
+      display: none;
+    }
+    
+    .form-step.active {
+      display: block;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .otp-input {
+      width: 45px;
+      height: 45px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0 5px;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    
+    .otp-input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      outline: none;
+    }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Create Account</h1>
-
-    <form id="signupForm">
-      <div class="form-group">
-        <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
-        <div class="error-message" id="fullNameError">Please enter your full name</div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
+    <h1 class="text-3xl font-bold text-center text-indigo-600 mb-6">Sign Up</h1>
+    
+    <!-- Step 1: Signup Form -->
+    <form id="signupForm" class="form-step active">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input type="text" id="name" class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-400" placeholder="Enter your full name" required />
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-400" placeholder="Enter your email" required />
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-400" placeholder="Create a password" required />
+        </div>
+        
+        <div class="flex items-center">
+          <input type="checkbox" id="terms" required class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+          <label for="terms" class="ml-2 block text-sm text-gray-700">
+            I agree to the <a href="#" class="text-indigo-600 hover:underline">Terms of Service</a> and <a href="#" class="text-indigo-600 hover:underline">Privacy Policy</a>
+          </label>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-        <div class="error-message" id="emailError">Please enter a valid email address</div>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Create a password" required>
-        <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
-      </div>
-
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
-        <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
-      </div>
-
-      <button type="button" class="btn btn-primary" id="sendOtpBtn" onclick="sendOTP()">Send OTP</button>
+      
+      <button type="submit" id="signupBtn" class="w-full mt-6 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+        <span id="signupText">Sign Up</span>
+        <div id="signupLoader" class="loader hidden"></div>
+      </button>
     </form>
-
-    <div class="otp-section" id="otpSection">
-      <div class="form-group">
-        <label for="otp">Verification Code</label>
-        <input type="text" id="otp" name="otp" placeholder="Enter the OTP sent to your email" maxlength="6">
-        <div class="error-message" id="otpError">Please enter the 6-digit OTP</div>
+    
+    <!-- Step 2: OTP Verification -->
+    <div id="otpVerification" class="form-step">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-gray-900">Verify Your Email</h2>
+        <p class="mt-2 text-gray-600">We've sent a 6-digit code to <span id="emailDisplay" class="font-medium">your email</span></p>
+        
+        <div class="mt-6 flex justify-center">
+          <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 1)">
+          <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 2)">
+          <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 3)">
+          <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 4)">
+          <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 5)">
+          <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 6)">
+        </div>
+        
+        <div id="otpError" class="mt-4 text-red-600 text-sm hidden">
+          Invalid verification code. Please try again.
+        </div>
+        
+        <button id="verifyOtpBtn" class="w-full mt-6 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+          <span id="verifyText">Verify & Continue</span>
+          <div id="verifyLoader" class="loader hidden"></div>
+        </button>
+        
+        <div class="mt-4 text-sm text-gray-600">
+          Didn't receive the code? <button id="resendOtp" class="text-indigo-600 font-medium hover:underline">Resend</button>
+        </div>
       </div>
-
-      <button type="button" class="btn btn-primary" id="verifyOtpBtn" onclick="verifyOTP()">Verify OTP</button>
-      <button type="button" class="btn btn-secondary" onclick="resendOTP()">Resend OTP</button>
     </div>
-
-    <div id="result"></div>
-
-    <button type="button" class="btn btn-primary" id="signupBtn" style="display: none; margin-top: 20px;" onclick="completeSignup()">Complete Signup</button>
+    
+    <!-- Step 3: Success Message -->
+    <div id="successMessage" class="form-step text-center py-8">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-900">Account Created Successfully!</h2>
+      <p class="mt-2 text-gray-600">Your SparkLearn account has been created and verified.</p>
+      
+      <div class="mt-8 bg-indigo-50 p-4 rounded-xl text-left">
+        <p class="text-sm font-medium text-indigo-800">What's next?</p>
+        <ul class="mt-2 text-sm text-indigo-600 list-disc list-inside space-y-1">
+          <li>Check your email for welcome materials</li>
+          <li>Explore our learning programs</li>
+          <li>Book your first free trial class</li>
+        </ul>
+      </div>
+      
+      <a href="login.html" class="inline-block mt-8 py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors">
+        Go to Login
+      </a>
+    </div>
+    
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Already have an account?
+      <a href="login.html" class="text-indigo-600 hover:underline">Log in</a>
+    </p>
   </div>
 
   <script>
-    const formUrl = "https://docs.google.com/forms/d/1pRVzxch_8J47sSfGM8UC-FxlMnf8NlYEDWohWTZfgsQ/formResponse";
-
-    function completeSignup() {
-      // Collect form data
-      const formData = new FormData();
-      formData.append("entry.1690951564", document.getElementById("fullName").value);   // replace with Full Name field ID
-      formData.append("entry.193299761", document.getElementById("email").value);      // replace with Email field ID
-      formData.append("entry.319455608", document.getElementById("password").value);   // replace with Password field ID
-
-      fetch(formUrl, {
-        method: "POST",
-        body: formData,
-        mode: "no-cors"
-      })
-      .then(() => {
-        showMessage("Account created successfully!", "success");
-      })
-      .catch((err) => {
-        showMessage("Error submitting form: " + err, "error");
-      });
+    // Your Google Apps Script Web App URL
+    const scriptUrl = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+    
+    // Form navigation
+    const signupForm = document.getElementById('signupForm');
+    const otpVerification = document.getElementById('otpVerification');
+    const successMessage = document.getElementById('successMessage');
+    const emailDisplay = document.getElementById('emailDisplay');
+    const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+    const resendOtp = document.getElementById('resendOtp');
+    const otpError = document.getElementById('otpError');
+    const signupBtn = document.getElementById('signupBtn');
+    const signupText = document.getElementById('signupText');
+    const signupLoader = document.getElementById('signupLoader');
+    const verifyText = document.getElementById('verifyText');
+    const verifyLoader = document.getElementById('verifyLoader');
+    
+    // Move between OTP inputs
+    function moveToNext(input, nextIndex) {
+      const maxLength = parseInt(input.getAttribute('maxlength'));
+      const currentLength = input.value.length;
+      
+      if (currentLength >= maxLength) {
+        const nextInput = input.nextElementSibling;
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+      
+      // Auto-submit if all fields are filled
+      const otpInputs = document.querySelectorAll('.otp-input');
+      const allFilled = Array.from(otpInputs).every(otp => otp.value !== '');
+      
+      if (allFilled) {
+        verifyOtpBtn.focus();
+      }
     }
-
-    function showMessage(message, type) {
-      const resultDiv = document.getElementById("result");
-      resultDiv.textContent = message;
-      resultDiv.className = type;
-      resultDiv.style.display = "block";
-    }
-
-    // (your sendOTP, verifyOTP, resendOTP functions remain the same)
+    
+    // Form submission
+    signupForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Show loading state
+      signupText.textContent = 'Processing...';
+      signupLoader.classList.remove('hidden');
+      signupBtn.disabled = true;
+      
+      // Get form data
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      try {
+        // Send data to Google Apps Script
+        const response = await fetch(scriptUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'signup',
+            name: name,
+            email: email,
+            password: password
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Show email in verification step
+          emailDisplay.textContent = email;
+          
+          // Move to OTP verification step
+          signupForm.classList.remove('active');
+          otpVerification.classList.add('active');
+        } else {
+          alert('Error: ' + result.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      } finally {
+        // Reset button state
+        signupText.textContent = 'Sign Up';
+        signupLoader.classList.add('hidden');
+        signupBtn.disabled = false;
+      }
+    });
+    
+    // Verify OTP button
+    verifyOtpBtn.addEventListener('click', async function() {
+      const otpInputs = document.querySelectorAll('.otp-input');
+      const otpCode = Array.from(otpInputs).map(input => input.value).join('');
+      
+      if (otpCode.length !== 6 || !/^\d+$/.test(otpCode)) {
+        otpError.textContent = 'Please enter a valid 6-digit code';
+        otpError.classList.remove('hidden');
+        return;
+      }
+      
+      // Show loading state
+      verifyText.textContent = 'Verifying...';
+      verifyLoader.classList.remove('hidden');
+      verifyOtpBtn.disabled = true;
+      
+      try {
+        // Verify OTP with Google Apps Script
+        const email = emailDisplay.textContent;
+        const response = await fetch(scriptUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'verify',
+            email: email,
+            otp: otpCode
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (result.verified) {
+          // Success - move to completion step
+          otpVerification.classList.remove('active');
+          successMessage.classList.add('active');
+        } else {
+          // Show error
+          otpError.textContent = result.message || 'Invalid verification code. Please try again.';
+          otpError.classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        otpError.textContent = 'An error occurred. Please try again.';
+        otpError.classList.remove('hidden');
+      } finally {
+        // Reset button state
+        verifyText.textContent = 'Verify & Continue';
+        verifyLoader.classList.add('hidden');
+        verifyOtpBtn.disabled = false;
+      }
+    });
+    
+    // Resend OTP
+    resendOtp.addEventListener('click', async function() {
+      const email = emailDisplay.textContent;
+      
+      // Show loading state
+      resendOtp.textContent = 'Sending...';
+      resendOtp.disabled = true;
+      
+      try {
+        // Request OTP resend
+        const response = await fetch(scriptUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'resend',
+            email: email
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Show success message
+          resendOtp.textContent = 'Sent!';
+          
+          // Clear OTP inputs
+          const otpInputs = document.querySelectorAll('.otp-input');
+          otpInputs.forEach(input => input.value = '');
+          
+          // Focus on first OTP input
+          if (otpInputs[0]) {
+            otpInputs[0].focus();
+          }
+          
+          // Hide any previous error
+          otpError.classList.add('hidden');
+        } else {
+          alert('Error: ' + result.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      } finally {
+        setTimeout(() => {
+          resendOtp.textContent = 'Resend';
+          resendOtp.disabled = false;
+        }, 30000); // 30 seconds
+      }
+    });
   </script>
 </body>
 </html>
