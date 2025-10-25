@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SparkLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .qualification-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .qualification-table th, .qualification-table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .qualification-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+        
+        .experience-timeline {
+            border-left: 3px solid #4f46e5;
+            padding-left: 20px;
+            margin-left: 10px;
+        }
+        
+        .experience-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .experience-item:before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-sparkles text-indigo-600 text-xl mr-2"></i>
+                        <span class="font-bold text-xl text-indigo-600">SparkLearn</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.html" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="programs.html" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium">Programs</a>
+                        <a href="about.html" class="border-b-2 border-indigo-500 text-gray-900 px-3 py-2 text-sm font-medium">About</a>
+                        <a href="login.html" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium">Login</a>
+                        <a href="signup.html" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-indigo-700 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-bold mb-4">About SparkLearn</h1>
+            <p class="text-xl max-w-3xl mx-auto">Empowering young minds to become confident communicators and future leaders</p>
+        </div>
+    </div>
+
+    <!-- Founder's Profile -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+                <!-- Founder Photo & Basic Info -->
+                <div class="text-center lg:text-left">
+                    <div class="w-48 h-48 bg-indigo-200 rounded-full mx-auto lg:mx-0 mb-6 flex items-center justify-center">
+                        <i class="fas fa-user-graduate text-indigo-600 text-6xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Shalini Dubey</h2>
+                    <p class="text-indigo-600 text-xl font-semibold mb-4">Director & CEO</p>
+                    <div class="bg-indigo-50 rounded-lg p-4 mb-6">
+                        <p class="text-gray-700 text-sm">
+                            <i class="fas fa-quote-left text-indigo-400 mr-2"></i>
+                            Passionate educator with 8+ years of experience in transforming English language learning through innovative teaching methodologies
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Educational Qualifications -->
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Educational Qualifications</h3>
+                    <div class="overflow-x-auto">
+                        <table class="qualification-table">
+                            <thead>
+                                <tr>
+                                    <th>Qualification</th>
+                                    <th>Subject</th>
+                                    <th>University/Board</th>
+                                    <th>Percentage</th>
+                                    <th>Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>M.A.</td>
+                                    <td>Economics</td>
+                                    <td>V.B.S. Purvanchal University, Jaunpur</td>
+                                    <td>64%</td>
+                                    <td>2021</td>
+                                </tr>
+                                <tr>
+                                    <td>D.El.Ed.</td>
+                                    <td>All Compulsory Subjects</td>
+                                    <td>Examination Regulatory Authority, Prayagraj</td>
+                                    <td>91%</td>
+                                    <td>2019</td>
+                                </tr>
+                                <tr>
+                                    <td>B.Com</td>
+                                    <td>Commerce</td>
+                                    <td>V.B.S. Purvanchal University, Jaunpur</td>
+                                    <td>61%</td>
+                                    <td>2017</td>
+                                </tr>
+                                <tr>
+                                    <td>12th</td>
+                                    <td>Commerce + English, Hindi</td>
+                                    <td>St. Joseph School, Jaunpur</td>
+                                    <td>82.5%</td>
+                                    <td>2014</td>
+                                </tr>
+                                <tr>
+                                    <td>10th</td>
+                                    <td>General Subjects</td>
+                                    <td>St. Joseph School, Jaunpur</td>
+                                    <td>85%</td>
+                                    <td>2012</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teaching Experience -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Teaching & Educational Experience</h2>
+            
+            <div class="experience-timeline">
+                <!-- Private Tuition Teacher -->
+                <div class="experience-item">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Private Tuition Teacher – English & General Communication Skills (Grades 1–10)</h3>
+                    <div class="flex items-center text-gray-600 mb-3">
+                        <i class="fas fa-map-marker-alt text-indigo-500 mr-2"></i>
+                        <span class="mr-4">Ghaziabad</span>
+                        <i class="far fa-calendar text-indigo-500 mr-2"></i>
+                        <span>Ongoing</span>
+                    </div>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Provide one-on-one and group classes for students from Grade 1 to Grade 10
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            For Grades 1–8: Teach all subjects including English, General Science, EVS, Mathematics, and Social Studies
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            For Grades 9–10: Specialize in English language, literature, and communication skills
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Use activity-based learning, role-play, and visual aids to enhance understanding and retention
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Prepare students for State Board, CBSE, and ICSE exams with syllabus-aligned lesson plans
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- PlanetSpark -->
+                <div class="experience-item">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">English Communication Skills Trainer – PlanetSpark (Online)</h3>
+                    <div class="flex items-center text-gray-600 mb-3">
+                        <i class="far fa-calendar text-indigo-500 mr-2"></i>
+                        <span>2022 – 2023</span>
+                    </div>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Delivered premium English communication training to school students and young learners
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Improved grammar, vocabulary, fluency, pronunciation, and public speaking skills
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Designed interactive lessons using storytelling, debates, and real-life conversation practice
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Provided personalized feedback to track progress and address specific learning needs
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Utkarsh Classes -->
+                <div class="experience-item">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Content Developer – Utkarsh Classes & Edutech Pvt. Ltd. (Remote, Freelance)</h3>
+                    <div class="flex items-center text-gray-600 mb-3">
+                        <i class="far fa-calendar text-indigo-500 mr-2"></i>
+                        <span>Nov 2023 – Mar 2025</span>
+                    </div>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Created foundation-level study notes and practice questions for competitive exams (BPSC, State-level)
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Developed question banks and answer keys as per NCERT and State Board guidelines
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Updated content with current affairs and real-world examples to improve learner engagement
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Learning Closet -->
+                <div class="experience-item">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Content Developer – Learning Closet Pvt. Ltd. (formerly Examपुर) (Remote)</h3>
+                    <div class="flex items-center text-gray-600 mb-3">
+                        <i class="far fa-calendar text-indigo-500 mr-2"></i>
+                        <span>June 2021 – Dec 2021</span>
+                    </div>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Designed Child Development & Pedagogy (CDP) learning modules for CTET aspirants
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Reviewed and edited test items to maintain accuracy and syllabus alignment
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            Ensured content was interactive, age-appropriate, and examination-ready
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Mission & Vision -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-white p-8 rounded-2xl shadow-sm feature-card border border-indigo-100">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-bullseye text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+                    <p class="text-gray-600">
+                        To transform English language learning by creating engaging, personalized experiences that build confident communicators. 
+                        Under Shalini Dubey's leadership, we combine academic excellence with practical teaching methodologies to ensure every child 
+                        discovers the joy of effective communication.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm feature-card border border-green-100">
+                    <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-eye text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
+                    <p class="text-gray-600">
+                        A world where every child possesses the communication skills and confidence to share their ideas, pursue their dreams, 
+                        and make positive contributions to their communities. Drawing from Shalini's extensive experience, we create learning 
+                        environments that nurture both academic success and personal growth.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teaching Philosophy -->
+    <section class="py-16 bg-indigo-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Shalini's Teaching Philosophy</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Proven methodologies refined through years of hands-on teaching experience</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg feature-card">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-user-graduate text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Student-Centered Approach</h3>
+                    <p class="text-gray-600 text-sm">Every lesson tailored to individual learning styles and academic needs</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg feature-card">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-gamepad text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Activity-Based Learning</h3>
+                    <p class="text-gray-600 text-sm">Role-play, visual aids, and interactive methods for better retention</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg feature-card">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-yellow-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Exam-Focused Preparation</h3>
+                    <p class="text-gray-600 text-sm">Syllabus-aligned lesson plans for CBSE, ICSE, and State Board exams</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg feature-card">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-comments text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Communication Excellence</h3>
+                    <p class="text-gray-600 text-sm">Focus on grammar, vocabulary, fluency, and public speaking skills</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">SparkLearn</h3>
+                    <p class="text-gray-400">Building confident communicators through expert-led language learning.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Programs</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="programs.html" class="hover:text-white">Kindergarten</a></li>
+                        <li><a href="programs.html" class="hover:text-white">Grades 1-3</a></li>
+                        <li><a href="programs.html" class="hover:text-white">Grades 4-5</a></li>
+                        <li><a href="programs.html" class="hover:text-white">Grades 6-8</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Learning Materials</a></li>
+                        <li><a href="#" class="hover:text-white">Teaching Guides</a></li>
+                        <li><a href="#" class="hover:text-white">Activity Sheets</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="login.html" class="hover:text-white">Login</a></li>
+                        <li><a href="signup.html" class="hover:text-white">Sign Up</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 SparkLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
